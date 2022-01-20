@@ -88,7 +88,7 @@ $ python tasks.py report # Statistics"""
                 manage(args)
         manage(args)
 
-        self.current_items = dict(sorted(self.current_items.items()))
+        # self.current_items = dict(sorted(self.current_items.items()))
         self.write_current()
         print(f'Added task: "{args[1]}" with priority {args[0]}')
 
@@ -117,17 +117,14 @@ $ python tasks.py report # Statistics"""
 
     def ls(self):
         """Lists out all the current items"""
-        index = 1
-        print(self.current_items)
-        for key, value in self.current_items.items():
-            print(f'{index}. {value} [{key}]')
-            index += 1
+        for i, (key, value) in enumerate(self.current_items.items()):
+            print(f'{i+1}. {value} [{key}]')
 
     def report(self):
         """Prints out the report of pending and completed tasks"""
         print(f'Pending : {len(self.current_items)}')
         self.ls()
-        print(f'Completed : {len(self.completed_items)}')
+        print(f'\nCompleted : {len(self.completed_items)}')
         self.read_completed()
         for index, item in enumerate(self.completed_items):
             print(f'{index+1}. {item}')
